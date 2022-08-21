@@ -34,13 +34,6 @@ export default async function deposit(
     SUPPLY_AAVE_ADDRESS
   )) as SupplyAave;
 
-  // logger.info("Approving...");
-  // const approveTx = await token
-  //   .connect(user)
-  //   .approve(AAVE_POOL_ADDRESS!, amount, gas);
-  // await approveTx.wait();
-  // logger.info("Approved!");
-
   logger.info("Approving...");
   const approveTx = await token
     .connect(user)
