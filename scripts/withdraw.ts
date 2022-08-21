@@ -1,6 +1,7 @@
 import { ethers } from "hardhat";
-import { BigNumber, logger } from "ethers";
+import { BigNumber } from "ethers";
 import { SupplyAave, SupplyAave__factory } from "../typechain-types";
+const logger = require("pino")();
 
 const { SUPPLY_AAVE_ADDRESS } = process.env;
 const GAS_LIMIT = BigNumber.from("2074000");
