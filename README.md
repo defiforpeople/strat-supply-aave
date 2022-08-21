@@ -30,6 +30,10 @@ Firstly, you have to install the packages. The command is:
 
 `yarn install`
 
+For compile the contracts use:
+
+`yarn hardhat compile`
+
 ### Setup .env files
 
 You will need to setup a `.env` file for every network that you are going to use.
