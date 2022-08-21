@@ -1,23 +1,28 @@
+import { BigNumber } from "ethers";
 import { ethers } from "hardhat";
+import { SupplyAave, SupplyAave__factory } from "../typechain-types";
+const logger = require("pino")();
 
-async function main() {
-  const currentTimestampInSeconds = Math.round(Date.now() / 1000);
-  const ONE_YEAR_IN_SECS = 365 * 24 * 60 * 60;
-  const unlockTime = currentTimestampInSeconds + ONE_YEAR_IN_SECS;
+const { AAVE_POOL_ADDRESS } = process.env;
+const GAS_LIMIT = BigNumber.from("2074000");
+const gas = { gasLimit: GAS_LIMIT };
 
-  const lockedAmount = ethers.utils.parseEther("1");
+const deploy = async () => {
+  const supplyAaveFactory = (await ethers.getContractFactory(
+    "SupplyAave"
+  )) as SupplyAave__factory;
 
-  const Lock = await ethers.getContractFactory("Lock");
-  const lock = await Lock.deploy(unlockTime, { value: lockedAmount });
+  // deploy strategy contract
+  const strategyContract = (await supplyAaveFactory.deploy(
+    `${AAVE_POOL_ADDRESS}`,
+    gas
+  )) as SupplyAave;
+  await strategyContract.deployed();
 
-  await lock.deployed();
+  logger.info(`SupplyAave address: ${strategyContract.address}`);
+};
 
-  console.log(`Lock with 1 ETH and unlock timestamp ${unlockTime} deployed to ${lock.address}`);
-}
-
-// We recommend this pattern to be able to use async/await everywhere
-// and properly handle errors.
-main().catch((error) => {
+deploy().catch((error) => {
   console.error(error);
   process.exitCode = 1;
 });
