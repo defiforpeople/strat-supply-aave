@@ -18,6 +18,9 @@ Typescript is the programming language used for developing the scripts (with `et
 
 Typescript and Waffle were used for tests (with `ethers` library too).
 
+Solidity is the programing language for developing the smart contracts (libraries imported from openZeppelin and aaveV3-core)
+
+
 ---
 
 # How to use
