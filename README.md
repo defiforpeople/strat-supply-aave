@@ -32,6 +32,19 @@ The contract is already verified:
 * Here you can check all the tx of the contract that I deployed on the `Mumbai` testnet network in polygonscan with this link: 
 
   https://mumbai.polygonscan.com/address/0x125dF0B4Ab64Bf6AeD9Fdac6FbaBc4Cf441614B7
+ 
+--------
+
+## Stack
+
+Hardhat is the framework used.
+
+Typescript is the programming language used for developing the scripts (with `ethers` library too).
+
+Typescript and Waffle were used for tests (with `ethers` library too).
+
+Solidity is the programing language for developing the smart contracts (libraries imported from openZeppelin and aaveV3-core)
+
 
 -------
 
@@ -58,30 +71,16 @@ For example, `.env.polygon` and `.env.mumbai` would have the same variables, but
 
 Each `.env.<network_name>` contains the variables names that the `.sample-env` file has.
 
-### Methods Execution
+## Methods Execution
 
-This contract has only 2 external methods: `Deposit` and `Withdraw` (all methods must be directly executed from the sender address):
+This contract has only 2 external methods: `deposit()` and `withdraw()` (all methods must be directly executed from the sender address):
 
-* **Deposit(address tokenAddr, uint256 amount)**: The first step is to approve the ERC20 token to transfer an amount to the `SupplyAave` contract address with the sender, and then execute Deposit method passing the sender address and the mentioned amount as params.
+* **deposit(address tokenAddr, uint256 amount)**: The first step is to approve the ERC20 token to transfer an amount to the `SupplyAave` contract address with the sender, and then execute Deposit method passing the sender address and the mentioned amount as params.
 The sender has to approve the a approve the amount before executing, and needs to have the amount for the transaction to succed.
 
-* **Withdraw(address tokenAddr, uint256 amount)**: The params are the sender address, and the amount that wants to withdraw. The sender needs to verify that he already has deposited trough `SupplyAave` contract the same amount or more amount than what he wants to withdraw in order for the transaction to succed.
+* **withdraw(address tokenAddr, uint256 amount)**: The params are the sender address, and the amount that wants to withdraw. The sender needs to verify that he already has deposited trough `SupplyAave` contract the same amount or more amount than what he wants to withdraw in order for the transaction to succed.
 
 --------
-
-## Stack
-
-Hardhat is the framework used.
-
-Typescript is the programming language used for developing the scripts (with `ethers` library too).
-
-Typescript and Waffle were used for tests (with `ethers` library too).
-
-Solidity is the programing language for developing the smart contracts (libraries imported from openZeppelin and aaveV3-core)
-
-
----
-
 
 ### Tests
 
